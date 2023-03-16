@@ -33,8 +33,8 @@ public class Main
     		boolean usaLentes = random.nextBoolean();
     		boolean usaGorra = random.nextBoolean();
     		boolean atributo3 = random.nextBoolean();
-    		boolean atributo4 = random.nextBoolean();
-    		personajes[i]= new Persona(nombres[i], usaLentes, usaGorra, atributo3, atributo4);
+    		boolean tieneEstudios = random.nextBoolean();
+    		personajes[i]= new Persona(nombres[i], usaLentes, usaGorra, atributo3, tieneEstudios);
     	}
     		
     	System.out.println("---------- Adivina quién ---------");
@@ -44,7 +44,7 @@ public class Main
     	
     	for(int i = 0; i < personajes.length; i++)
     	{
-    	    System.out.print("* " + personajes[i].getNombre() + ": ");
+    	    System.out.print("* " + i + ") " + personajes[i].getNombre() + ": ");
     	    if(personajes[i].lentes())
     	    {
     	    	System.out.print("Tiene lentes, ");
@@ -63,12 +63,20 @@ public class Main
     	    }
     	    if(personajes[i].tieneAtributo3())
     	    {
-    	    	System.out.print(atributoVariable[i]);
+    	    	System.out.print(atributoVariable[i] + ", ");
+    	    }
+    	    if(personajes[i].estudios())
+    	    {
+    	    	System.out.print("tiene estudios.");
+    	    }
+    	    else
+    	    {
+    	    	System.out.print("no tiene estudios.");
     	    }
     	    System.out.println("");
-    	    System.out.println("");
-    	    
+    	    System.out.println(""); 
     	}
+    	
     	System.out.println("----------------------------------------------------------------------------------------");
     	System.out.println("El sistema está eligiendo un personaje...");
     	System.out.println("Podrás hacer 3 preguntas sobre sus características y tendrás un intento para adivinar...");
@@ -85,8 +93,10 @@ public class Main
     		System.out.println("1. ¿El personaje tiene lentes?");
     		System.out.println("2. ¿El personaje usa gorra?");
     		System.out.println("3. ¿El personaje juega un deporte?");
+    		System.out.println("4. ¿El personaje tiene estudios?");
     		System.out.println("");
     		
+    		System.out.print("Tu elección: ");
     		int preguntaDelUsuario = selección.nextInt();
     		switch(preguntaDelUsuario)
     		{
@@ -150,28 +160,86 @@ public class Main
     			System.out.println("");
     			System.out.println("Sí");
     			System.out.println("");
-    			System.out.println("Selecciona un deporte:");
+    			for (int j = 0; j < personajes.length; j++) 
+        		{
+        			if (!personajes[j].estudios()) 
+        			{
+        				personajes[j].setNombre(null);
+        			}
+        		}
+    			System.out.println("Tienes una pregunta extra para seleccionar un deporte:");
     			System.out.println("");
         		for (int j = 0; j < atributoVariable.length; j++) 
         		{
-        			System.out.println((j + 1) + ". " + atributoVariable[j]);
+        			System.out.println(j + ") " + atributoVariable[j].substring(0, 1).toUpperCase() + atributoVariable[j].substring(1));
         		}
-        		int deporteSeleccionado = selección.nextInt() - 1;
-        		String deporte = atributoVariable[deporteSeleccionado];
-        		for (int j = 0; j < personajes.length; j++) 
+        		System.out.println("");
+        		System.out.print("Tu elección: ");
+        		int indiceSeleccionado = selección.nextInt();
+        		String deporte = atributoVariable[indiceSeleccionado];
+        		if(deporte.equals(atributoVariable[indicePersonajeElegido]))
         		{
-        			if (!personajes[j].tieneAtributo3() || !deporte.equals(atributoVariable[j])) 
+        			for (int j = 0; j < personajes.length; j++) 
+            		{
+            			if (!atributoVariable[j].equals(atributoVariable[indicePersonajeElegido])) 
+            			{
+            				personajes[j].setNombre(null);
+            			}
+            		}
+            		break;
+        		}
+        		else
+        		{
+        			for (int j = 0; j < personajes.length; j++) 
+            		{
+            			if (atributoVariable[j].equals(atributoVariable[indicePersonajeElegido])) 
+            			{
+            				personajes[j].setNombre(null);
+            			}
+            		}
+            		break;
+        		}
+    		}
+    		else
+    		{
+    			System.out.println("");
+    			System.out.println("No");
+    			for (int j = 0; j < personajes.length; j++) 
+        		{
+        			if (personajes[j].tieneAtributo3()) 
         			{
         				personajes[j].setNombre(null);
         			}
         		}
         		break;
     		}
-    		else
-    		{
-    			System.out.println("");
-    			System.out.println("No");
-    		}
+    		case 4:
+        	if(personajes[indicePersonajeElegido].estudios())
+        	{
+        		System.out.println("");
+        		System.out.println("Sí");
+        		for(int j = 0; j < personajes.length; j++)
+            	{
+            		if(personajes[j].estudios() == false)
+            		{
+            			personajes[j].setNombre(null);
+            		}
+            	}
+        		break;
+        	}
+        	else
+        	{
+        		System.out.println("");
+        		System.out.println("No");
+        		for(int j = 0; j < personajes.length; j++)
+            	{
+            		if(personajes[j].estudios())
+            		{
+            			personajes[j].setNombre(null);
+            		}
+            	}
+        		break;
+        	}
     		}
     		System.out.println("");
     		System.out.println("Los personajes restantes son:");
@@ -185,10 +253,7 @@ public class Main
     		}
     		System.out.println("");
     	}
-    	
-    	System.out.println("");
-    	System.out.println("Introduce el número correspondiente a la persona que consideres que ha elegido el sistema: ");
-    	System.out.println("");
+    	System.out.print("Introduce el número correspondiente a la persona que consideres que ha elegido el sistema: ");
     	int adivinanza = selección.nextInt();
     	System.out.println("");
     	if(adivinanza == indicePersonajeElegido)

@@ -50,8 +50,8 @@ public abstract class PersonaBase
     	this.usaGorra = usaGorra;
     }
 
-    public void setAtributo3(boolean atributo3) 
+    public void setTieneAtributo3(boolean tieneAtributo3) 
     {
-    	this.atributo3 = atributo3;
+    	this.atributo3 = tieneAtributo3;
     }
 }

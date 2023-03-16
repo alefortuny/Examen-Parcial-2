@@ -2,12 +2,12 @@ package guesswho;
 
 public class Persona extends PersonaBase
 {
-    private boolean atributo4;
+    private boolean tieneEstudios;
     
-    public Persona(String nombre, boolean usaLentes, boolean usaGorra, boolean atributo3, boolean atributo4) 
+    public Persona(String nombre, boolean usaLentes, boolean usaGorra, boolean atributo3, boolean tieneEstudios) 
     {
         super(nombre, usaLentes, usaGorra, atributo3);
-        this.atributo4 = atributo4;
+        this.tieneEstudios = tieneEstudios;
     }
     
     public boolean lentes() 
@@ -25,9 +25,9 @@ public class Persona extends PersonaBase
         return super.tieneAtributo3();
     }
     
-    public boolean tieneAtributo4()
+    public boolean estudios()
     {
-    	return atributo4;
+    	return tieneEstudios;
     }
     
     public void setNombre(String nombre) 
@@ -45,13 +45,20 @@ public class Persona extends PersonaBase
         super.setUsaGorra(usaGorra);
     }
 
-    public void setAtributo3(boolean atributo3) 
+    public void setTieneAtributo3(boolean atributo3) 
     {
-        super.setAtributo3(atributo3);
+        super.setTieneAtributo3(atributo3);
     }
 
-    public void setAtributo4(boolean atributo4) 
+    public void setTieneEstudios(boolean tieneEstudios) 
     {
-        this.atributo4 = atributo4;
+        if(lentes() == gorra() && gorra() == tieneAtributo3())
+        {
+        	this.tieneEstudios = !lentes();
+        }
+        else
+        {
+        	this.tieneEstudios = tieneEstudios;
+        }
     }
 }
