@@ -5,14 +5,14 @@ public abstract class PersonaBase
     private String nombre;
     private boolean usaLentes;
     private boolean usaGorra;
-    private boolean atributo3;
+    private boolean juegaDeporte;
 
-    public PersonaBase(String nombre, boolean usaLentes, boolean usaGorra, boolean atributo3) 
+    public PersonaBase(String nombre, boolean usaLentes, boolean usaGorra, boolean juegaDeporte) 
     {
         this.nombre = nombre;
         this.usaLentes = usaLentes;
         this.usaGorra = usaGorra;
-        this.atributo3 = atributo3;
+        this.juegaDeporte = juegaDeporte;
     }
 
     public String getNombre() 
@@ -30,9 +30,9 @@ public abstract class PersonaBase
         return usaGorra;
     }
     
-    public boolean tieneAtributo3() 
+    public boolean deporte() 
     {
-        return atributo3;
+        return juegaDeporte;
     }
     
     public void setNombre(String nombre) 
@@ -50,8 +50,8 @@ public abstract class PersonaBase
     	this.usaGorra = usaGorra;
     }
 
-    public void setTieneAtributo3(boolean tieneAtributo3) 
+    public void setDeporte(boolean juegaDeporte) 
     {
-    	this.atributo3 = tieneAtributo3;
+    	this.juegaDeporte = juegaDeporte;
     }
 }

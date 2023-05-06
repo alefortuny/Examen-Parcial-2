@@ -4,10 +4,15 @@ public class Persona extends PersonaBase
 {
     private boolean tieneEstudios;
     
-    public Persona(String nombre, boolean usaLentes, boolean usaGorra, boolean atributo3, boolean tieneEstudios) 
+    public Persona(String nombre, boolean usaLentes, boolean usaGorra, boolean deporte, boolean tieneEstudios) 
     {
-        super(nombre, usaLentes, usaGorra, atributo3);
+        super(nombre, usaLentes, usaGorra, deporte);
         this.tieneEstudios = tieneEstudios;
+    }
+    
+    public String nombre()
+    {
+    	return super.getNombre();
     }
     
     public boolean lentes() 
@@ -20,9 +25,9 @@ public class Persona extends PersonaBase
         return super.gorra();
     }
     
-    public boolean tieneAtributo3() 
+    public boolean deporte()
     {
-        return super.tieneAtributo3();
+        return super.deporte();
     }
     
     public boolean estudios()
@@ -45,14 +50,14 @@ public class Persona extends PersonaBase
         super.setUsaGorra(usaGorra);
     }
 
-    public void setTieneAtributo3(boolean atributo3) 
+    public void setJuegaDeporte(boolean juegaDeporte) 
     {
-        super.setTieneAtributo3(atributo3);
+        super.setDeporte(juegaDeporte);
     }
 
     public void setTieneEstudios(boolean tieneEstudios) 
     {
-        if(lentes() == gorra() && gorra() == tieneAtributo3())
+        if(lentes() == gorra() && gorra() == deporte())
         {
         	this.tieneEstudios = !lentes();
         }
